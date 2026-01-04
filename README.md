@@ -1,65 +1,88 @@
-# 🤖 AI Assistant Behavior Prediction Agent
+# AI Assistant Usage Behavior Analysis
 
-Agente de IA especializado en predecir el comportamiento de asistentes de IA basado en patrones de uso históricos.
+Comprehensive analysis and prediction tool for AI assistant usage patterns.
 
-## 📋 Descripción
+## Description
 
-Este agente utiliza Machine Learning para predecir múltiples aspectos del comportamiento de asistentes de IA:
-- ⭐ **Satisfacción del usuario** (1-5)
-- 🎯 **Tokens consumidos** en una sesión
-- ⏱️ **Duración de la sesión** en minutos
+This project provides both command-line and GUI interfaces for analyzing AI assistant usage behavior. It uses Machine Learning to predict:
+- User satisfaction ratings (1-5)
+- Tokens consumed in a session
+- Session duration in minutes
 
-## 🎯 Características
+The analysis is based on the structure from the Kaggle notebook "Daily AI Assistant Usage Behavior" and provides extensive exploratory data analysis with visualizations.
 
-### Modelos de Predicción
-1. **Predictor de Satisfacción**: RandomForestClassifier para clasificar niveles de satisfacción
-2. **Predictor de Tokens**: GradientBoostingRegressor para estimar consumo de tokens
-3. **Predictor de Duración**: RandomForestRegressor para estimar duración de sesión
+## Features
 
-### Análisis Exploratorio
-- Distribución por dispositivo, categoría y modelo de asistente
-- Estadísticas de satisfacción, tokens y duración de sesión
-- Identificación de patrones temporales (hora, día, mes)
-- Correlaciones entre variables
+### Analysis Components
+1. **Satisfaction Predictor**: RandomForestClassifier for classifying satisfaction levels
+2. **Tokens Predictor**: GradientBoostingRegressor for estimating token consumption
+3. **Session Length Predictor**: RandomForestRegressor for estimating session duration
 
-### Insights Generados
-- Satisfacción promedio por dispositivo y modelo
-- Consumo de tokens por categoría de uso
-- Horas de mayor actividad
-- Correlaciones importantes entre variables
+### Exploratory Data Analysis
+- Distribution analysis for all numerical and categorical features
+- Correlation matrix with heatmap visualization
+- Device, model, and category performance comparisons
+- Temporal pattern identification (hourly, daily, monthly)
+- Comprehensive statistical summaries
 
-## 🚀 Uso
+### Generated Visualizations
+- numerical_distributions.png - Histograms of all numerical features
+- categorical_distributions.png - Bar charts of categorical variables
+- correlation_matrix.png - Heatmap showing feature correlations
+- satisfaction_by_device.png - Average satisfaction per device type
+- hourly_usage.png - Usage patterns throughout the day
+- tokens_by_category.png - Token consumption by usage category
+- session_by_model.png - Session lengths by AI model
+- confusion_matrix_satisfaction.png - Model performance matrix
+- feature_importance_satisfaction.png - Most important features
+- tokens_prediction.png - Actual vs predicted scatter plot
+- session_length_prediction.png - Actual vs predicted scatter plot
 
-### Ejecutar el Agente Completo
+## Usage
+
+### Command-Line Interface
+
+Run the complete analysis:
 
 ```bash
 python main.py
 ```
 
-Esto ejecutará:
-1. Carga y análisis del dataset
-2. Entrenamiento de los 3 modelos predictivos
-3. Generación de insights
-4. Ejemplos de predicción
+This will:
+1. Load and analyze the dataset
+2. Train all three prediction models
+3. Generate all visualizations (saved as PNG files)
+4. Display key insights
+5. Show example predictions
 
-### Usar el Agente Programáticamente
+### Graphical User Interface (wxPython)
+
+Launch the native GUI application:
+
+```bash
+python gui.py
+```
+
+GUI Features:
+- Load dataset through file dialog
+- Run analysis with progress tracking
+- View results in organized tabs
+- Make predictions with interactive form
+- Native look and feel on all platforms
+
+### Programmatic Usage
 
 ```python
-from main import AIBehaviorPredictionAgent
+from analysis import AIUsageBehaviorAnalysis
 
-# Inicializar agente
-agent = AIBehaviorPredictionAgent('Daily_AI_Assistant_Usage_Behavior_Dataset.csv')
+# Initialize
+analysis = AIUsageBehaviorAnalysis('Daily_AI_Assistant_Usage_Behavior_Dataset.csv')
 
-# Cargar datos
-agent.load_and_preprocess_data()
+# Run complete analysis
+analysis.run_full_analysis()
 
-# Entrenar modelos
-agent.train_satisfaction_predictor()
-agent.train_tokens_predictor()
-agent.train_session_length_predictor()
-
-# Hacer una predicción
-prediction = agent.predict_behavior(
+# Make custom predictions
+prediction = analysis.predict(
     device='Desktop',
     usage_category='Coding',
     assistant_model='GPT-5',
@@ -69,24 +92,24 @@ prediction = agent.predict_behavior(
     month=1
 )
 
-print(f"Satisfacción: {prediction['satisfaction']}")
+print(f"Satisfaction: {prediction['satisfaction']}")
 print(f"Tokens: {prediction['tokens']}")
-print(f"Duración: {prediction['session_length']} minutos")
+print(f"Duration: {prediction['session_length']} minutes")
 ```
 
-## 📊 Dataset
+## Dataset Structure
 
-El dataset incluye las siguientes características:
-- **timestamp**: Fecha y hora de la sesión
-- **device**: Dispositivo usado (Desktop, Mobile, Tablet, Smart Speaker)
-- **usage_category**: Categoría de uso (Coding, Research, Writing, Education, etc.)
-- **prompt_length**: Longitud del prompt
-- **session_length_minutes**: Duración de la sesión
-- **satisfaction_rating**: Calificación de satisfacción (1-5)
-- **assistant_model**: Modelo de asistente (GPT-4o, GPT-5, GPT-5.1, o1, Mini)
-- **tokens_used**: Cantidad de tokens consumidos
+The dataset includes the following features:
+- **timestamp**: Date and time of the session
+- **device**: Device type (Desktop, Mobile, Tablet, Smart Speaker)
+- **usage_category**: Usage category (Coding, Research, Writing, Education, etc.)
+- **prompt_length**: Length of the prompt
+- **session_length_minutes**: Session duration
+- **satisfaction_rating**: Satisfaction rating (1-5)
+- **assistant_model**: AI model (GPT-4o, GPT-5, GPT-5.1, o1, Mini)
+- **tokens_used**: Number of tokens consumed
 
-## 🛠️ Dependencias
+## Dependencies
 
 ```
 pandas
@@ -94,49 +117,58 @@ numpy
 scikit-learn
 matplotlib
 seaborn
+wxPython
 ```
 
-Instalar con:
+Install with:
 ```bash
-pip install pandas numpy scikit-learn matplotlib seaborn
+pip install pandas numpy scikit-learn matplotlib seaborn wxPython
 ```
 
-## 📈 Métricas de Rendimiento
+## Project Structure
 
-El agente reporta las siguientes métricas:
+```
+proyecto-final/
+├── main.py                                    # Command-line interface
+├── analysis.py                                # Core analysis class
+├── gui.py                                     # wxPython GUI application
+├── Daily_AI_Assistant_Usage_Behavior_Dataset.csv  # Dataset
+├── README.md                                  # Documentation
+└── *.png                                      # Generated visualizations
+```
 
-### Predictor de Satisfacción
-- Precisión (Accuracy)
-- Reporte de clasificación completo
-- Importancia de features
+## Model Performance
 
-### Predictores de Tokens y Duración
-- MAE (Mean Absolute Error)
-- RMSE (Root Mean Squared Error)
-- R² (Coeficiente de determinación)
-- Importancia de features
+### Satisfaction Prediction
+- Metric: Accuracy
+- Algorithm: Random Forest Classifier
+- Features: Device, category, model, prompt length, temporal data
 
-## 🎓 Casos de Uso
+### Token Prediction
+- Metrics: MAE, RMSE, R-squared
+- Algorithm: Gradient Boosting Regressor
+- Features: Same as satisfaction + satisfaction rating
 
-1. **Optimización de Experiencia**: Predecir satisfacción antes de una interacción
-2. **Gestión de Recursos**: Estimar consumo de tokens para planificación
-3. **Análisis de Patrones**: Identificar tendencias de uso
-4. **Recomendaciones**: Sugerir mejores configuraciones basadas en predicciones
+### Session Length Prediction
+- Metrics: MAE, RMSE, R-squared
+- Algorithm: Random Forest Regressor
+- Features: Same as token prediction
 
-## 🔮 Ejemplos de Predicción
+## Use Cases
 
-El agente incluye ejemplos predefinidos:
-- Sesión de Coding en Desktop
-- Sesión de Research en Mobile
-- Sesión de Entertainment en Tablet
+1. **Experience Optimization**: Predict satisfaction before interaction
+2. **Resource Management**: Estimate token consumption for planning
+3. **Pattern Analysis**: Identify usage trends and patterns
+4. **Recommendations**: Suggest optimal configurations based on predictions
+5. **Performance Monitoring**: Track model and device performance
 
-## 📝 Notas
+## Reference
 
-- Los modelos se entrenan automáticamente al ejecutar el script
-- Las predicciones son probabilísticas basadas en patrones históricos
-- La precisión mejora con más datos de entrenamiento
+Based on the Kaggle notebook structure:
+"Daily AI Assistant Usage Behavior" by Ayse irem Colak
 
-## 👨‍💻 Autor
+## Author
 
 Proyecto Final - Inteligencia Artificial
-ESCOM, 9° Semestre
+ESCOM, 9 Semestre
+
