@@ -1,8 +1,3 @@
-"""
-Daily AI Assistant Usage Behavior Analysis
-Based on Kaggle notebook structure for comprehensive data analysis
-"""
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt

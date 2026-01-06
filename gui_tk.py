@@ -1,8 +1,3 @@
-"""
-GUI for AI Assistant Usage Behavior Analysis
-Native look and feel using Tkinter (more stable on Linux)
-"""
-
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox, scrolledtext
 import threading
