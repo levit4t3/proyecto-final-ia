@@ -55,20 +55,34 @@ This will:
 4. Display key insights
 5. Show example predictions
 
-### Graphical User Interface (wxPython)
+### Graphical User Interface
 
-Launch the native GUI application:
+**Option 1: Tkinter GUI (Recommended for Linux)**
+
+Launch the Tkinter-based GUI (more stable on Linux):
+
+```bash
+python gui_tk.py
+```
+
+**Features:**
+- Auto-loads dataset from current directory
+- Big START ANALYSIS button in the center
+- Progress tracking with status updates
+- Automatically saves 11 PNG visualizations to project folder
+- View detailed results in organized tabs
+- Make predictions with interactive form
+- Native look and feel
+
+**Option 2: wxPython GUI**
+
+Launch the wxPython GUI (may have issues on some Linux distributions):
 
 ```bash
 python gui.py
 ```
 
-GUI Features:
-- Load dataset through file dialog
-- Run analysis with progress tracking
-- View results in organized tabs
-- Make predictions with interactive form
-- Native look and feel on all platforms
+If you encounter GTK errors with wxPython, use the Tkinter version instead.
 
 ### Programmatic Usage
 
@@ -111,18 +125,30 @@ The dataset includes the following features:
 
 ## Dependencies
 
+**Required (always install):**
 ```
 pandas
 numpy
 scikit-learn
 matplotlib
 seaborn
+```
+
+**Optional (for wxPython GUI):**
+```
 wxPython
 ```
 
-Install with:
+Note: Tkinter comes pre-installed with Python, no installation needed.
+
+Install required dependencies:
 ```bash
-pip install pandas numpy scikit-learn matplotlib seaborn wxPython
+pip install pandas numpy scikit-learn matplotlib seaborn
+```
+
+Install wxPython (optional, only if you want to use gui.py):
+```bash
+pip install wxPython
 ```
 
 ## Project Structure
@@ -131,7 +157,8 @@ pip install pandas numpy scikit-learn matplotlib seaborn wxPython
 proyecto-final/
 ├── main.py                                    # Command-line interface
 ├── analysis.py                                # Core analysis class
-├── gui.py                                     # wxPython GUI application
+├── gui_tk.py                                  # Tkinter GUI (recommended for Linux)
+├── gui.py                                     # wxPython GUI (alternative)
 ├── Daily_AI_Assistant_Usage_Behavior_Dataset.csv  # Dataset
 ├── README.md                                  # Documentation
 └── *.png                                      # Generated visualizations
